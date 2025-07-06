@@ -6,7 +6,7 @@ import baseball.service.ResultCheckService;
 import baseball.view.InputView;
 import baseball.view.OutputView;
 import baseball.view.ReGameView;
-import enums.GameCommand;
+import baseball.enums.GameCommand;
 
 public class BaseballController {
 

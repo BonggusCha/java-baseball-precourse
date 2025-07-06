@@ -1,4 +1,4 @@
-package enums;
+package baseball.enums;
 
 public enum GameCommand {
     RESTART(1),
