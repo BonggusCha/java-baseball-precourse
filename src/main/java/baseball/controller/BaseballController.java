@@ -6,6 +6,7 @@ import baseball.service.ResultCheckService;
 import baseball.view.InputView;
 import baseball.view.OutputView;
 import baseball.view.ReGameView;
+import enums.GameCommand;
 
 public class BaseballController {
 
@@ -18,25 +19,33 @@ public class BaseballController {
 
     public void run() {
 
-        while (true) {
+
+        do {
+            playSingleGame();
+        } while (shouldRestart());
+        }
+
+
+        private void playSingleGame() {
             String answer = numberGeneratorService.generateNumbers();
+
             while (true) {
-                String user = inputView.getUserInput();
-                GameStatusModel result = resultCheckService.judgeResult(user, answer);
+                String userInput = inputView.getUserInput();
+                GameStatusModel result = resultCheckService.judgeResult(userInput, answer);
                 outputView.resultOutput(result);
 
                 if (result.isWin()) {
                     break;
                 }
             }
+        }
 
-            int userInput = reGameView.reGame();
-            if (userInput == 2) {
-                break;
-            }
+        private boolean shouldRestart() {
+            int input = reGameView.reGame();
+            GameCommand command = GameCommand.fromCode(input);
+            return command == GameCommand.RESTART;
         }
 
 
 
     }
-}
